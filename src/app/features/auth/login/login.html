@@ -1,0 +1,59 @@
+<div class="min-h-screen bg-[#F3EEF5] flex items-center justify-center p-6 font-sans text-gray-800">
+  
+  <div class="w-full max-w-5xl flex flex-col md:flex-row items-center gap-12">
+    
+    <div class="hidden md:flex flex-col w-1/2">
+      <h1 class="text-2xl font-bold text-[#1a1443] mb-12 pl-4">EduMatch</h1>
+      <img src="students.png" 
+           alt="Students" class="w-full max-w-md drop-shadow-xl opacity-90">
+    </div>
+
+    <div class="bg-white/80 backdrop-blur-xl p-8 rounded-[2rem] shadow-2xl w-full max-w-md border border-white">
+      
+      <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-[#1a1443]">Welcome Back!</h2>
+        <p class="text-sm text-gray-500 mt-2">Log in to continue learning.</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
+
+        <div class="relative">
+          <span class="absolute left-4 top-3.5 text-gray-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          </span>
+          <input type="email" formControlName="email" placeholder="University Email" 
+                 class="w-full pl-12 pr-4 py-3 border border-[#d6cce5] rounded-full text-sm focus:outline-none focus:border-[#7B207A] bg-[#fbf9fc] transition-colors">
+        </div>
+
+        <div class="relative">
+          <span class="absolute left-4 top-3.5 text-gray-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          </span>
+          <input type="password" formControlName="password" placeholder="Password" 
+                 class="w-full pl-12 pr-12 py-3 border border-[#d6cce5] rounded-full text-sm focus:outline-none focus:border-[#7B207A] bg-[#fbf9fc] transition-colors">
+          <span class="absolute right-4 top-3.5 text-gray-400 cursor-pointer hover:text-[#7B207A] transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+          </span>
+        </div>
+
+        <div class="flex justify-between items-center">
+          <a href="#" class="text-xs font-semibold text-[#1C8D83] hover:underline">Forgot Password?</a>
+        </div>
+
+        <button type="submit" 
+                class="w-full bg-gradient-to-r from-[#7B207A] to-[#F1684B] text-white py-3 rounded-full font-semibold shadow-lg hover:opacity-90 transition-all transform hover:-translate-y-0.5 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                [disabled]="!loginForm.valid">
+          Log In
+        </button>
+
+        <div class="text-center mt-6">
+          <p class="text-xs text-gray-600">
+            Don't have an account? 
+            <a routerLink="/register" class="text-[#1C8D83] font-bold hover:underline cursor-pointer">Sign Up</a>
+          </p>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

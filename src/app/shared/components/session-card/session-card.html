@@ -1,0 +1,55 @@
+<div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+  <div class="flex justify-between items-start mb-4">
+    <h3 class="text-lg font-semibold text-gray-900">{{ session.title }}</h3>
+    <span class="px-2 py-1 rounded-full text-xs font-medium" [class]="getStatusColor(session.status)">
+      {{ session.status.replace('-', ' ') }}
+    </span>
+  </div>
+  
+  <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ session.description }}</p>
+  
+  <div class="space-y-2 text-sm text-gray-500">
+    <div class="flex items-center">
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      {{ formatDate(session.scheduledDate) }}
+    </div>
+    
+    <div class="flex items-center">
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      {{ formatDuration(session.duration) }}
+    </div>
+    
+    <div class="flex items-center">
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+      </svg>
+      {{ session.currentParticipants }}/{{ session.maxParticipants }} participants
+    </div>
+    
+    <div class="flex items-center">
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      </svg>
+      {{ session.isOnline ? 'Online' : session.location }}
+    </div>
+  </div>
+  
+  <div class="mt-4 pt-4 border-t border-gray-200">
+    <div class="flex justify-between items-center">
+      <div>
+        <p class="text-sm font-medium text-gray-900">Tutor: {{ session.tutorName }}</p>
+        <p class="text-sm text-gray-500">{{ session.subject }}</p>
+      </div>
+      <button 
+        class="bg-[#1a1443] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#2a2443] transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+        [disabled]="session.currentParticipants >= session.maxParticipants || session.status !== 'scheduled'">
+        {{ session.currentParticipants >= session.maxParticipants ? 'Full' : 'Join Session' }}
+      </button>
+    </div>
+  </div>
+</div>

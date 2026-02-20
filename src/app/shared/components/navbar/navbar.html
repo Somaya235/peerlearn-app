@@ -1,0 +1,40 @@
+<nav class="bg-white shadow-lg border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex items-center">
+        <a routerLink="/dashboard" class="text-xl font-bold text-[#1a1443] hover:text-[#2a2443] transition-colors">
+          EduMatch
+        </a>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <a 
+          routerLink="/dashboard" 
+          class="text-gray-700 hover:text-[#1a1443] px-3 py-2 rounded-md text-sm font-medium transition-colors">
+          Dashboard
+        </a>
+        <a 
+          routerLink="/sessions" 
+          class="text-gray-700 hover:text-[#1a1443] px-3 py-2 rounded-md text-sm font-medium transition-colors">
+          Sessions
+        </a>
+        <a 
+          routerLink="/profile" 
+          class="text-gray-700 hover:text-[#1a1443] px-3 py-2 rounded-md text-sm font-medium transition-colors">
+          Profile
+        </a>
+        
+        <div class="flex items-center space-x-2 ml-4 pl-4 border-l border-gray-300">
+          <span class="text-sm text-gray-600">
+            {{ currentUser?.fullName }}
+          </span>
+          <button 
+            (click)="logout()"
+            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm font-medium transition-colors">
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

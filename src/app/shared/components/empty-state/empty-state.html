@@ -1,0 +1,22 @@
+<div class="empty-state">
+  <div class="empty-state-content">
+    <div class="empty-state-icon">
+      {{ icon }}
+    </div>
+    
+    <h3 class="empty-state-title">
+      {{ title }}
+    </h3>
+    
+    <p class="empty-state-description">
+      {{ description }}
+    </p>
+    
+    <button 
+      *ngIf="showButton"
+      (click)="buttonAction()"
+      class="empty-state-button">
+      {{ buttonText }}
+    </button>
+  </div>
+</div>
