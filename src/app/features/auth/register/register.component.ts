@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
+import { UserService } from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -16,10 +17,13 @@ export class RegisterComponent {
   currentStep: number = 1;
   isLoading: boolean = false;
   errorMessage: string = '';
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private userService: UserService,
     private router: Router
   ) {
     this.registerForm = this.fb.group({
@@ -38,7 +42,16 @@ export class RegisterComponent {
     });
   }
 
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfirmPasswordVisibility(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
   nextStep(): void {
+    this.errorMessage = ''; // Clear error when attempting to proceed
     if (this.validateCurrentStep()) {
       if (this.currentStep < 3) {
         this.currentStep++;
@@ -47,6 +60,7 @@ export class RegisterComponent {
   }
 
   prevStep(): void {
+    this.errorMessage = ''; // Clear error when going back
     if (this.currentStep > 1) {
       this.currentStep--;
     }
@@ -61,7 +75,18 @@ export class RegisterComponent {
         const confirmPassword = this.registerForm.get('confirmPassword');
         
         if (!fullName?.valid || !email?.valid || !password?.valid || !confirmPassword?.valid) {
+          if (!password?.valid) {
+            this.errorMessage = 'Password must be at least 6 characters long';
+          } else {
+            this.errorMessage = 'Please fill in all required fields correctly';
+          }
           this.registerForm.markAllAsTouched();
+          return false;
+        }
+        
+        // Check if email already exists
+        if (this.userService.findByEmail(email.value)) {
+          this.errorMessage = 'This email is already registered. Please use a different email or log in.';
           return false;
         }
         

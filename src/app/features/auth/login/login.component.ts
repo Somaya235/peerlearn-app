@@ -15,6 +15,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   isLoading: boolean = false;
   errorMessage: string = '';
+  showPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -25,6 +26,10 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 
   async onSubmit(): Promise<void> {

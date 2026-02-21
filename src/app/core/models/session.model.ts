@@ -5,6 +5,8 @@ export interface Session {
   subject: string;
   tutorId: string;
   tutorName: string;
+  tutorAvatar?: string;
+  rating?: number;
   studentId?: string;
   studentName?: string;
   maxParticipants: number;
