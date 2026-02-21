@@ -134,7 +134,8 @@ export class RegisterComponent {
       }));
       
       if (result) {
-        // Navigate to login 
+        // Navigate to login (clear any existing session first)
+        this.authService.logout();
         this.router.navigate(['/login']);
       } else {
         this.errorMessage = 'Registration failed. Email already exists or invalid data.';
