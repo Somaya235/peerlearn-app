@@ -59,6 +59,13 @@ export class AuthService {
     };
 
     this.userService.saveUser(newUser);
+    
+    const { password, ...userWithoutPassword } = newUser;
+    if (this.isBrowser) {
+      localStorage.setItem(this.SESSION_KEY, JSON.stringify(userWithoutPassword));
+    }
+    this.currentUserSubject.next(userWithoutPassword as User);
+    
     return of(true);
   }
 
