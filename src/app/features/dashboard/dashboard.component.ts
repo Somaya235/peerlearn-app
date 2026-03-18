@@ -1,22 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { SessionCardComponent } from '../../shared/components/session-card/session-card.component';
 import { UserCardComponent } from '../../shared/components/user-card/user-card.component';
+import { SessionDetailsModalComponent } from '../sessions/session-details-modal/session-details-modal.component';
 import { Session } from '../../core/models/session.model';
 import { User } from '../../core/models/user.model';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, SessionCardComponent, UserCardComponent],
+  imports: [CommonModule, NavbarComponent, SessionCardComponent, UserCardComponent, SessionDetailsModalComponent],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.scss']
 })
 export class DashboardComponent {
   currentUser: any;
+
+  @ViewChild(SessionDetailsModalComponent) sessionDetailsModal!: SessionDetailsModalComponent;
 
   // Mock sessions data
   sessions: Session[] = [
@@ -120,5 +123,9 @@ export class DashboardComponent {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  onSessionClick(session: Session): void {
+    this.sessionDetailsModal.open(session);
   }
 }

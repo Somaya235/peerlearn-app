@@ -31,7 +31,11 @@
 
       <!-- Session Cards -->
       <div class="space-y-4">
-        <app-session-card *ngFor="let session of sessions" [session]="session"></app-session-card>
+        <app-session-card 
+          *ngFor="let session of sessions" 
+          [session]="session"
+          (sessionClick)="onSessionClick($event)">
+        </app-session-card>
       </div>
     </section>
 
@@ -76,3 +80,6 @@
 
   </main>
 </div>
+
+<!-- Session Details Modal -->
+<app-session-details-modal></app-session-details-modal>

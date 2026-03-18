@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Session } from '../../../core/models/session.model';
 
@@ -11,6 +11,7 @@ import { Session } from '../../../core/models/session.model';
 })
 export class SessionCardComponent {
   @Input() session!: Session;
+  @Output() sessionClick = new EventEmitter<Session>();
 
   getStatusColor(status: Session['status']): string {
     switch (status) {
@@ -44,5 +45,9 @@ export class SessionCardComponent {
       hour: '2-digit',
       minute: '2-digit'
     });
+  }
+
+  onClick(): void {
+    this.sessionClick.emit(this.session);
   }
 }

@@ -3,6 +3,7 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ProfileComponent } from './features/profile/profile.component';
+import { ScheduleComponent } from './features/schedule/schedule.component';
 import { authGuard } from './core/guards/auth.guard';
 import { guestGuard } from './core/guards/guest.guard';
 
@@ -31,6 +32,11 @@ export const routes: Routes = [
   { 
     path: 'profile', 
     component: ProfileComponent,
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'schedule', 
+    component: ScheduleComponent,
     canActivate: [authGuard]
   },
   

@@ -83,18 +83,28 @@ export class SessionService {
 
   joinSession(sessionId: string): Promise<boolean> {
     // TODO: Implement actual API call
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(true);
+        try {
+          // Simulate successful join
+          resolve(true);
+        } catch (error) {
+          reject(error);
+        }
       }, 500);
     });
   }
 
   leaveSession(sessionId: string): Promise<boolean> {
     // TODO: Implement actual API call
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(true);
+        try {
+          // Simulate successful leave
+          resolve(true);
+        } catch (error) {
+          reject(error);
+        }
       }, 500);
     });
   }

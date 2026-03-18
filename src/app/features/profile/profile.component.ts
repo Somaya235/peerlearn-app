@@ -89,38 +89,4 @@ export class ProfileComponent {
       availableTimes: []
     };
   }
-
-  sessions = [
-    {
-      title: 'Introduction to Macroeconomics',
-      topic: 'Economics',
-      tool: 'Zoom',
-      seatsTaken: 6,
-      seatsTotal: 10,
-      available: true
-    },
-    {
-      title: 'Understanding GDP & Economic Growth',
-      topic: 'Economics',
-      tool: 'Google Meet',
-      seatsTaken: 8,
-      seatsTotal: 10,
-      available: false
-    }
-  ];
-
-  reviews = [
-    {
-      name: 'Ahmed Khaled',
-      rating: 4.5,
-      comment: 'Excellent tutor! Clear explanations and very patient.',
-      date: '2 days ago'
-    },
-    {
-      name: 'Sarah Ali',
-      rating: 4.0,
-      comment: 'Great sessions, very knowledgeable.',
-      date: '2 days ago'
-    }
-  ];
 }

@@ -79,69 +79,10 @@
         </div>
       </div>
 
-      <!-- Sessions -->
-      <div class="bg-white rounded-2xl p-6 shadow">
-        <h3 class="font-bold mb-4">Sessions Created</h3>
-
-        <div *ngFor="let s of sessions" class="border rounded-xl p-4 mb-4">
-          <div class="flex justify-between items-center">
-            <div>
-              <h4 class="font-semibold">{{ s.title }}</h4>
-              <p class="text-xs text-gray-500">Topic: {{ s.topic }}</p>
-              <p class="text-xs text-gray-500">{{ s.tool }}</p>
-            </div>
-
-            <span
-              class="px-4 py-1 rounded-full text-xs"
-              [ngClass]="s.available ? 'bg-green-100 text-green-600' : 'bg-gray-200 text-gray-500'">
-              {{ s.available ? 'Available' : 'Full' }}
-            </span>
-          </div>
-
-          <div class="mt-3">
-            <div class="w-full bg-gray-200 h-2 rounded-full">
-              <div
-                class="h-2 bg-purple-500 rounded-full"
-                [style.width.%]="(s.seatsTaken / s.seatsTotal) * 100">
-              </div>
-            </div>
-            <p class="text-xs mt-1 text-gray-500">
-              {{ s.seatsTaken }}/{{ s.seatsTotal }} Seats Taken
-            </p>
-          </div>
-
-          <button
-            class="mt-3 px-4 py-2 rounded-full text-sm"
-            [disabled]="!s.available"
-            [ngClass]="s.available
-              ? 'bg-gradient-to-r from-[#7B207A] to-[#F1684B] text-white'
-              : 'bg-gray-200 text-gray-400 cursor-not-allowed'">
-            {{ s.available ? 'Join Session' : 'Full' }}
-          </button>
-        </div>
-      </div>
-
     </div>
 
     <!-- Right -->
     <div class="space-y-6">
-
-      <!-- Reviews -->
-      <div class="bg-white rounded-2xl p-6 shadow">
-        <h3 class="font-bold mb-4">Student Reviews</h3>
-
-        <div *ngFor="let r of reviews" class="mb-4">
-          <h4 class="font-semibold text-sm">{{ r.name }}</h4>
-          <p class="text-xs text-yellow-500">⭐ {{ r.rating }}</p>
-          <p class="text-sm text-gray-600">{{ r.comment }}</p>
-          <p class="text-xs text-gray-400">{{ r.date }}</p>
-        </div>
-
-        <button class="w-full mt-3 bg-gradient-to-r from-[#7B207A] to-[#F1684B] text-white py-2 rounded-full">
-          Add Feedback
-        </button>
-      </div>
-
     </div>
   </div>
 </div>
