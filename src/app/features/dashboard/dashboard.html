@@ -26,11 +26,45 @@
           <span class="px-4 py-1 bg-white/20 rounded-full text-sm cursor-pointer hover:bg-white/30 transition">Top Tutors</span>
           <span class="px-4 py-1 bg-white/20 rounded-full text-sm cursor-pointer hover:bg-white/30 transition">Available</span>
           <span class="px-4 py-1 bg-white/20 rounded-full text-sm cursor-pointer hover:bg-white/30 transition">Advanced Filters</span>
+          <!-- Debug button - remove in production -->
+          <button (click)="createTestSession()" class="px-4 py-1 bg-red-500/20 rounded-full text-sm cursor-pointer hover:bg-red-500/30 transition text-red-300">
+            Create Test Session
+          </button>
         </div>
       </div>
 
       <!-- Session Cards -->
-      <div class="space-y-4">
+      <div class="space-y-8">
+        <!-- Loading State -->
+        <div *ngIf="isLoading" class="text-center py-8">
+          <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#7B207A]"></div>
+          <p class="mt-2 text-gray-600">Loading available sessions...</p>
+        </div>
+        
+        <!-- Debug Info - remove in production -->
+        <div *ngIf="!isLoading" class="bg-blue-50 p-4 rounded-lg mb-4 text-sm">
+          <p><strong>Debug Info:</strong></p>
+          <p>Loading: {{ isLoading }}</p>
+          <p>Sessions count: {{ sessions.length }}</p>
+          <p *ngIf="sessions.length > 0">First session: {{ sessions[0].title }}</p>
+        </div>
+        
+        <!-- Empty State -->
+        <div *ngIf="!isLoading && sessions.length === 0" class="text-center py-8 bg-white rounded-2xl shadow-sm">
+          <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">No Available Sessions</h3>
+          <p class="text-gray-600 mb-6">
+            There are no tutoring sessions available right now. 
+            Be the first to create one!
+          </p>
+          <a routerLink="/schedule" class="inline-block bg-gradient-to-r from-[#7B207A] to-[#F1684B] text-white px-6 py-3 rounded-full font-semibold">
+            Create a Session
+          </a>
+        </div>
+        
+        <!-- Sessions List -->
         <app-session-card 
           *ngFor="let session of sessions" 
           [session]="session"
@@ -47,7 +81,7 @@
         <h4 class="font-bold text-[#1a1443] mb-4">Top Tutors of the Week</h4>
 
         <div class="space-y-4">
-          <app-user-card *ngFor="let tutor of topTutors" [user]="tutor"></app-user-card>
+          <app-user-card *ngFor="let tutor of topTutors" [user]="tutor" (userClick)="onUserClick($event)"></app-user-card>
         </div>
       </div>
 

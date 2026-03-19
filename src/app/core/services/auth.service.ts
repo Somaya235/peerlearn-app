@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 import { User } from '../models/user.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { UserSessionService } from './user-session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class AuthService {
   private isBrowser: boolean;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private userSessionService: UserSessionService
   ) {
     const platformId = inject(PLATFORM_ID);
     this.isBrowser = isPlatformBrowser(platformId);
@@ -73,6 +75,8 @@ export class AuthService {
     if (this.isBrowser) {
       localStorage.removeItem(this.SESSION_KEY);
     }
+    // Clear user-specific joined sessions
+    this.userSessionService.clearJoinedSessions();
     this.currentUserSubject.next(null);
   }
 

@@ -76,13 +76,13 @@
             <h3 class="font-semibold text-gray-800 mb-2">Availability</h3>
             <div class="bg-[#F3EEF5] rounded-lg p-4">
               <div class="flex justify-between items-center mb-2">
-                <span class="text-sm text-gray-600">Seats Available</span>
-                <span class="text-sm font-medium text-[#7B207A]">{{ getAvailableSeats() }}/{{ session.maxParticipants }}</span>
+                <span class="text-sm text-gray-600">Seats Taken</span>
+                <span class="text-sm font-medium text-[#7B207A]">{{ session.currentParticipants }}/{{ session.maxParticipants }}</span>
               </div>
               <div class="w-full bg-gray-200 rounded-full h-2">
                 <div class="bg-gradient-to-r from-[#7B207A] to-[#F1684B] h-2 rounded-full transition-all duration-300" [style.width.%]="getOccupancyPercentage()"></div>
               </div>
-              <p class="text-xs text-gray-500 mt-1">{{ getOccupancyPercentage() | number:'1.0-0' }}% filled</p>
+              <p class="text-xs text-gray-500 mt-1">{{ getAvailableSeats() }} seats available</p>
             </div>
           </div>
 

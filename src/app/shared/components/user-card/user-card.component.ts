@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../core/models/user.model';
 
@@ -11,6 +11,11 @@ import { User } from '../../../core/models/user.model';
 })
 export class UserCardComponent {
   @Input() user!: User;
+  @Output() userClick = new EventEmitter<User>();
+
+  onClick(): void {
+    this.userClick.emit(this.user);
+  }
 
   getRatingStars(rating?: number): string[] {
     const stars = [];

@@ -1,0 +1,60 @@
+.create-session-modal {
+  /* Additional styles if needed */
+}
+
+.form-input {
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  box-shadow: 0 0 0 3px rgba(123, 32, 122, 0.1);
+}
+
+.form-select {
+  transition: all 0.2s ease;
+}
+
+.form-select:focus {
+  box-shadow: 0 0 0 3px rgba(123, 32, 122, 0.1);
+}
+
+.success-animation {
+  animation: fadeInScale 0.3s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.radio-button {
+  transition: all 0.2s ease;
+}
+
+.radio-button:checked {
+  accent-color: #7B207A;
+}
+
+.submit-button {
+  transition: all 0.2s ease;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(123, 32, 122, 0.3);
+}
+
+.cancel-button {
+  transition: all 0.2s ease;
+}
+
+.cancel-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

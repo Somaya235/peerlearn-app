@@ -9,7 +9,7 @@
 
   <!-- Create Session Button -->
   <div class="mb-6">
-    <button class="bg-gradient-to-r from-[#7B207A] to-[#F1684B] text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-shadow">
+    <button (click)="openCreateSessionModal()" class="bg-gradient-to-r from-[#7B207A] to-[#F1684B] text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-shadow">
       <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
       </svg>
@@ -55,10 +55,10 @@
         ? 'Start by creating your first tutoring session to help others learn.' 
         : 'Browse available sessions and join ones that interest you.' }}
     </p>
-    <button *ngIf="activeTab === 'created'" class="bg-gradient-to-r from-[#7B207A] to-[#F1684B] text-white px-6 py-3 rounded-full font-semibold">
+    <button *ngIf="activeTab === 'created'" (click)="openCreateSessionModal()" class="bg-gradient-to-r from-[#7B207A] to-[#F1684B] text-white px-6 py-3 rounded-full font-semibold">
       Create Your First Session
     </button>
-    <button *ngIf="activeTab === 'joined'" class="border border-[#7B207A] text-[#7B207A] px-6 py-3 rounded-full font-semibold hover:bg-[#7B207A] hover:text-white">
+    <button *ngIf="activeTab === 'joined'" (click)="navigateToDashboard()" class="border border-[#7B207A] text-[#7B207A] px-6 py-3 rounded-full font-semibold hover:bg-[#7B207A] hover:text-white">
       Browse Sessions
     </button>
   </div>
@@ -73,5 +73,5 @@
   </div>
 </div>
 
-<!-- Session Details Modal -->
-<app-session-details-modal></app-session-details-modal>
+<!-- Create Session Modal -->
+<app-create-session-modal #createSessionModal (sessionCreated)="onSessionCreated($event)"></app-create-session-modal>

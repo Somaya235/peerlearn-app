@@ -1,0 +1,108 @@
+<div *ngIf="isVisible" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+    <!-- Header -->
+    <div class="p-6 border-b border-gray-200">
+      <div class="flex justify-between items-center">
+        <h2 class="text-xl font-bold text-gray-800">Add Feedback</h2>
+        <button 
+          (click)="close()" 
+          class="text-gray-400 hover:text-gray-600 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6">
+      <!-- Success Message -->
+      <div *ngIf="showSuccess" class="text-center py-8">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">Feedback Submitted!</h3>
+        <p class="text-gray-600">Thank you for your feedback.</p>
+      </div>
+
+      <!-- Feedback Form -->
+      <form *ngIf="!showSuccess" [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
+        <!-- Rating -->
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 mb-3">
+            Rating <span class="text-red-500">*</span>
+          </label>
+          <div class="flex items-center space-x-2">
+            <div class="flex space-x-1">
+              <button 
+                *ngFor="let star of getStars(feedbackForm.value.rating || 5); let i = index"
+                type="button"
+                (click)="setRating(i + 1)"
+                class="text-2xl transition-colors"
+                [class.text-yellow-400]="star"
+                [class.text-gray-300]="!star"
+                [class.hover:text-yellow-500]="!star">
+                ⭐
+              </button>
+            </div>
+            <span class="text-sm text-gray-600 ml-2">
+              ({{ feedbackForm.value.rating || 5 }}/5)
+            </span>
+          </div>
+          <input 
+            type="hidden" 
+            formControlName="rating"
+            id="rating">
+        </div>
+
+        <!-- Comment -->
+        <div class="mb-6">
+          <label for="comment" class="block text-sm font-medium text-gray-700 mb-2">
+            Comment <span class="text-red-500">*</span>
+          </label>
+          <textarea
+            id="comment"
+            formControlName="comment"
+            rows="4"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7B207A] focus:border-transparent resize-none"
+            placeholder="Share your experience..."
+            [class.border-red-500]="comment?.invalid && comment?.touched">
+          </textarea>
+          <div class="mt-1 text-xs text-gray-500">
+            {{ comment?.value?.length || 0 }}/500 characters
+          </div>
+          <div *ngIf="comment?.invalid && comment?.touched" class="mt-1 text-xs text-red-500">
+            <span *ngIf="comment?.errors?.['required']">Comment is required</span>
+            <span *ngIf="comment?.errors?.['minlength']">Comment must be at least 10 characters</span>
+            <span *ngIf="comment?.errors?.['maxlength']">Comment cannot exceed 500 characters</span>
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+          <p class="text-sm text-red-600">{{ errorMessage }}</p>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex space-x-3">
+          <button
+            type="button"
+            (click)="close()"
+            class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+            [disabled]="isLoading">
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="flex-1 px-4 py-2 bg-gradient-to-r from-[#7B207A] to-[#F1684B] text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+            [disabled]="feedbackForm.invalid || isLoading">
+            <span *ngIf="!isLoading">Submit Feedback</span>
+            <span *ngIf="isLoading">Submitting...</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
